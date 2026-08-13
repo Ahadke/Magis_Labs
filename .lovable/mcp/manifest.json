@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "sdk_version": "0.22.2",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "newsletter-mcp",
+      "version": "0.1.0",
+      "title": "Newsletter MCP"
+    },
+    "tools": [
+      {
+        "name": "subscribe_newsletter",
+        "title": "Subscribe to newsletter",
+        "description": "Subscribe an email address to the weekly newsletter. Returns whether the address was newly subscribed or was already on the list.",
+        "annotations": {
+          "readOnlyHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "maxLength": 255,
+              "format": "email",
+              "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$",
+              "description": "Email address to subscribe."
+            }
+          },
+          "required": [
+            "email"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
