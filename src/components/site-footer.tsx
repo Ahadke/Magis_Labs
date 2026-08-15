@@ -8,7 +8,7 @@ const LINKEDIN = "https://www.linkedin.com/showcase/the-magis-labs/";
 const COLUMN_ONE_LINKS = [
   { label: "About", to: "/about" as const },
   { label: "Vision", to: "/" as const, hash: "vision" as const },
-  { label: "Solutions", to: "/" as const, hash: "capabilities" as const },
+  { label: "What we do", to: "/" as const, hash: "capabilities" as const },
 ] as const;
 
 const COLUMN_TWO_LINKS = [

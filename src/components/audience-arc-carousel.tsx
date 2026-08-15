@@ -313,7 +313,7 @@ export function AudienceArcCarousel({ items }: { items: readonly AudienceArcItem
                     ) : (
                       <img
                         src={item.media.src}
-                        alt=""
+                        alt={item.title}
                         className="hp-audience__video"
                         loading="lazy"
                         decoding="async"

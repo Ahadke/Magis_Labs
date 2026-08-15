@@ -3,10 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
-import {
-  AudienceArcCarousel,
-  type AudienceArcItem,
-} from "@/components/audience-arc-carousel";
+import { AudienceArcCarousel, type AudienceArcItem } from "@/components/audience-arc-carousel";
 import { Reveal } from "@/components/site-kit";
 import heroClip02 from "@/assets/hero-clip-02.mp4";
 import heroClip03 from "@/assets/hero-clip-03.mp4";
@@ -115,7 +112,7 @@ function HomePage() {
         <div className="hp-mid-band" aria-hidden>
           <img
             src={homeBandMicroscopy}
-            alt=""
+            alt="Pink-stained microscopy of biological cells"
             className="hp-mid-band__img"
           />
         </div>
@@ -154,14 +151,8 @@ function HeroVideoSequence() {
   const [activeLayer, setActiveLayer] = useState<"a" | "b">("a");
   const switchingRef = useRef(false);
 
-  const getActiveRef = useCallback(
-    () => (activeLayer === "a" ? refA : refB),
-    [activeLayer],
-  );
-  const getInactiveRef = useCallback(
-    () => (activeLayer === "a" ? refB : refA),
-    [activeLayer],
-  );
+  const getActiveRef = useCallback(() => (activeLayer === "a" ? refA : refB), [activeLayer]);
+  const getInactiveRef = useCallback(() => (activeLayer === "a" ? refB : refA), [activeLayer]);
 
   useEffect(() => {
     const first = refA.current;
@@ -244,8 +235,7 @@ function Hero() {
             <span className="hp-hero__headline-line">modern healthcare</span>
           </h1>
           <p className="hp-hero__subhead">
-            Branding, content, AI, and growth for every kind of healthcare
-            organization.
+            Branding, content, AI, and growth for every kind of modern healthcare organization.
           </p>
           <StrategyCallButton className="hp-hero__cta" />
         </Reveal>
@@ -266,17 +256,17 @@ function WhyWeExist() {
       <div className="hp-container hp-why__inner">
         <Reveal>
           <SectionIndex value="01 — Why We Exist" />
-          <h2 className="hp-why__title font-display">
-            One partner for brand and growth.
-          </h2>
+          <h2 className="hp-why__title font-display">One partner for brand and growth.</h2>
           <p className="hp-why__statement">
-            Healthcare professionals spend their careers improving lives. Somewhere
-            along the way, marketing and technology became a second job they never
-            signed up for, a patchwork of freelancers, agencies, and software that
-            don&apos;t talk to each other. We started Magis Labs to change that. One
-            team across strategy, creative, and AI, so healthcare businesses can
-            build a brand people trust, reach the patients who need them, and scale
-            with the same care they bring to the people they treat.
+            Magis Labs exists to help healthcare organizations grow without losing the care that
+            made them matter. Healthcare professionals spend their careers improving lives.
+            Somewhere along the way, marketing, technology, and digital experiences became a second
+            job they never signed up for — a patchwork of freelancers, agencies, and software that
+            don&apos;t talk to each other. We started Magis Labs to change that. One team across
+            strategy, creative, and AI, so clinics, senior living, home care, and healthtech
+            companies can build a brand people trust, reach the patients who need them, and scale
+            toward the future of modern healthcare with the same care they bring to the people they
+            treat.
           </p>
         </Reveal>
       </div>
@@ -296,7 +286,9 @@ function WhoWeServe() {
             Built for every corner of healthcare.
           </h2>
           <p className="hp-audience-section__intro">
-            Wherever you are in healthcare, we&apos;ve built for it.
+            From private practices and longevity clinics to senior living, home care, and healthcare
+            technology, we build brand, growth, and digital experiences around the work you already
+            do.
           </p>
         </Reveal>
       </div>
@@ -315,12 +307,11 @@ function CapabilitiesTeaser() {
       <div className="hp-container hp-capabilities__head">
         <Reveal>
           <SectionIndex value="04 — What We Do" />
-          <h2 className="hp-capabilities__title font-display">
-            What we do, end to end.
-          </h2>
+          <h2 className="hp-capabilities__title font-display">What we do, end to end.</h2>
           <p className="hp-capabilities__intro">
-            From the first video to the last automation, we build the systems that
-            help healthcare businesses show up, get found, and keep growing.
+            Magis Labs brings branding, cinematic content, performance marketing, and AI-powered
+            technology into one practice. From the first film to the last automation, we build the
+            systems that help healthcare organizations show up, get found, and keep growing.
           </p>
         </Reveal>
       </div>
@@ -357,13 +348,12 @@ function Vision() {
           <SectionIndex value="03 — Vision" />
           <h2 className="hp-vision__title font-display">Our Vision</h2>
           <p className="hp-vision__text">
-            We envision a future where healthcare businesses build, innovate, and
-            scale effortlessly. Where a clinic can adopt AI without hiring a
-            technical team, where a founder can tell a complicated story in a way
-            anyone understands, and where growth doesn&apos;t come at the cost of
-            the care itself. From smarter clinics today to the tools that will
-            define healthcare a decade from now, we want to be the partner that
-            gets organizations there.
+            We envision a future of modern healthcare where organizations build, innovate, and scale
+            effortlessly. Where a clinic can adopt AI without hiring a technical team, where a
+            founder can tell a complicated story in a way anyone understands, and where growth
+            doesn&apos;t come at the cost of the care itself. From smarter clinics today to the
+            digital tools that will define healthcare a decade from now, we want to be the partner
+            that gets organizations there.
           </p>
         </Reveal>
       </div>
@@ -381,9 +371,7 @@ function ClosingCta() {
       </div>
       <div className="hp-container hp-close__inner">
         <Reveal>
-          <p className="hp-close__copy font-display">
-            Ready to grow your healthcare business?
-          </p>
+          <p className="hp-close__copy font-display">Ready to grow your healthcare business?</p>
           <StrategyCallButton />
         </Reveal>
       </div>
