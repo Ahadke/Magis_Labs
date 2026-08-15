@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Search, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { Accent, LoopVideo, PageHeroHeading, SectionHeading } from "@/components/site-kit";
@@ -47,6 +48,7 @@ const TABS = [
 
 const VIDEO_CARDS = [
   {
+    id: "launch-videos",
     featured: true,
     span3: true,
     name: "Launch Videos",
@@ -67,6 +69,7 @@ const VIDEO_CARDS = [
     cta: "Get a Quote",
   },
   {
+    id: "explainer-videos",
     name: "Explainer & Product Demo Videos",
     price: "$1,500",
     description:
@@ -82,6 +85,7 @@ const VIDEO_CARDS = [
     cta: "Get Started",
   },
   {
+    id: "founder-stories",
     name: "Founder & Brand Stories",
     price: "$2,500",
     description:
@@ -95,6 +99,7 @@ const VIDEO_CARDS = [
     ],
   },
   {
+    id: "testimonials",
     name: "Testimonials",
     price: "$500",
     unit: "/ video",
@@ -107,6 +112,7 @@ const VIDEO_CARDS = [
     ],
   },
   {
+    id: "social-content",
     name: "Social Content & Video Editing",
     price: "$3,000",
     unit: "/ month",
@@ -120,12 +126,14 @@ const VIDEO_CARDS = [
     ],
   },
   {
+    id: "cinematic-films",
     name: "Cinematic Brand Films",
     price: "$5,000",
     description:
       "Premium films for healthcare brands, clinics, facilities, campaigns, and organizations.",
   },
   {
+    id: "podcast",
     name: "Podcast Production",
     price: "$500",
     unit: "/ episode",
@@ -137,6 +145,343 @@ const VIDEO_CARDS = [
     ],
   },
 ];
+
+type SearchItem = {
+  id: string;
+  title: string;
+  section: string;
+  keywords: string;
+};
+
+const SERVICE_SEARCH: SearchItem[] = [
+  ...VIDEO_CARDS.map((card) => ({
+    id: card.id,
+    title: card.name,
+    section: "Video & Content",
+    keywords: [card.description, ...(card.items ?? []), "video film content production"].filter(Boolean).join(" "),
+  })),
+  {
+    id: "growth-marketing",
+    title: "Growth Marketing",
+    section: "Growth & Marketing",
+    keywords:
+      "paid media ads advertising ppc facebook instagram google ads lead generation campaign conversion patient acquisition performance reporting",
+  },
+  {
+    id: "seo-geo-aeo",
+    title: "SEO, GEO & AEO",
+    section: "Growth & Marketing",
+    keywords:
+      "search engine optimization google ranking organic local search visibility discovery answer engine generative engine content optimization healthcare seo",
+  },
+  {
+    id: "branding",
+    title: "Branding & Identity",
+    section: "Brand & Digital",
+    keywords:
+      "brand identity logo visual identity messaging brand guidelines look and feel naming distinctive trusted healthcare brand",
+  },
+  {
+    id: "uiux",
+    title: "UI/UX & Website Design",
+    section: "Brand & Digital",
+    keywords:
+      "website web design app interface ux strategy ui design responsive design systems prototypes conversion landing page",
+  },
+  {
+    id: "ai-automation",
+    title: "AI Automation",
+    section: "AI & Technology",
+    keywords:
+      "automate workflows crm lead management communication newsletters chatbot assistants custom automations operations",
+  },
+  {
+    id: "custom-ai",
+    title: "Custom AI & Technology",
+    section: "AI & Technology",
+    keywords:
+      "integrate ai intelligent workflows digital products emerging technology software custom build healthtech",
+  },
+  {
+    id: "growth-consulting",
+    title: "Healthcare Growth Consulting",
+    section: "Strategy",
+    keywords:
+      "strategy advisory go-to-market growth planning product launches positioning content strategy technology adoption scale clinic",
+  },
+  {
+    id: "drone-videography",
+    title: "Drone Videography",
+    section: "Drone",
+    keywords:
+      "aerial photography campus tours facility showcases promotional videos uav flyover real estate senior living wellness",
+  },
+];
+
+const RELATED_GROUPS = [
+  [
+    "video",
+    "videos",
+    "film",
+    "films",
+    "filming",
+    "cinematic",
+    "editing",
+    "edit",
+    "content",
+    "podcast",
+    "testimonial",
+    "testimonials",
+    "explainer",
+    "demo",
+    "production",
+    "story",
+    "stories",
+    "social",
+    "reels",
+    "shorts",
+  ],
+  [
+    "seo",
+    "search",
+    "google",
+    "organic",
+    "ranking",
+    "rankings",
+    "geo",
+    "aeo",
+    "local",
+    "visibility",
+    "discovery",
+  ],
+  [
+    "marketing",
+    "ads",
+    "advertising",
+    "paid",
+    "ppc",
+    "growth",
+    "leads",
+    "acquisition",
+    "campaign",
+    "campaigns",
+    "patients",
+  ],
+  [
+    "brand",
+    "branding",
+    "identity",
+    "logo",
+    "logos",
+    "messaging",
+    "guidelines",
+    "visual",
+  ],
+  [
+    "website",
+    "websites",
+    "web",
+    "ui",
+    "ux",
+    "uiux",
+    "design",
+    "prototype",
+    "prototypes",
+    "app",
+    "interface",
+  ],
+  [
+    "ai",
+    "automation",
+    "automate",
+    "chatbot",
+    "assistant",
+    "assistants",
+    "workflow",
+    "workflows",
+    "crm",
+    "tech",
+    "technology",
+  ],
+  [
+    "consulting",
+    "consultant",
+    "strategy",
+    "advisory",
+    "advisor",
+    "gtm",
+    "planning",
+    "positioning",
+  ],
+  [
+    "drone",
+    "drones",
+    "aerial",
+    "campus",
+    "facility",
+    "flyover",
+    "uav",
+    "photography",
+  ],
+];
+
+function normalizeSearch(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function expandQuery(query: string) {
+  const tokens = normalizeSearch(query).split(" ").filter(Boolean);
+  const expanded = new Set(tokens);
+  for (const token of tokens) {
+    for (const group of RELATED_GROUPS) {
+      if (group.some((term) => term === token || term.startsWith(token) || token.startsWith(term))) {
+        for (const term of group) expanded.add(term);
+      }
+    }
+  }
+  return [...expanded];
+}
+
+function scoreSearchItem(item: SearchItem, query: string) {
+  const normalizedQuery = normalizeSearch(query);
+  if (!normalizedQuery) return 0;
+
+  const title = normalizeSearch(item.title);
+  const haystack = normalizeSearch(`${item.title} ${item.section} ${item.keywords}`);
+  let score = 0;
+
+  if (title.includes(normalizedQuery)) score += 90;
+  if (title.startsWith(normalizedQuery)) score += 40;
+  if (haystack.includes(normalizedQuery)) score += 55;
+
+  for (const term of expandQuery(query)) {
+    if (haystack.includes(term)) score += term === normalizedQuery ? 14 : 7;
+  }
+
+  return score;
+}
+
+function scrollToSearchTarget(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+  el.classList.add("pp-card--search-hit");
+  window.setTimeout(() => el.classList.remove("pp-card--search-hit"), 1800);
+}
+
+function SolutionsSearch() {
+  const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  const results = useMemo(() => {
+    const trimmed = query.trim();
+    if (!trimmed) return [];
+    return SERVICE_SEARCH.map((item) => ({ item, score: scoreSearchItem(item, trimmed) }))
+      .filter((entry) => entry.score > 0)
+      .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title))
+      .slice(0, 8)
+      .map((entry) => entry.item);
+  }, [query]);
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [query]);
+
+  useEffect(() => {
+    const onPointerDown = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, []);
+
+  const goTo = (id: string) => {
+    scrollToSearchTarget(id);
+    setOpen(false);
+  };
+
+  return (
+    <div className="pp-search" ref={rootRef}>
+      <Search className="pp-search__icon" aria-hidden />
+      <input
+        type="search"
+        value={query}
+        onChange={(event) => {
+          setQuery(event.target.value);
+          setOpen(true);
+        }}
+        onFocus={() => setOpen(true)}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            setOpen(false);
+            event.currentTarget.blur();
+            return;
+          }
+          if (event.key === "ArrowDown") {
+            event.preventDefault();
+            setActiveIndex((index) => Math.min(index + 1, Math.max(results.length - 1, 0)));
+            return;
+          }
+          if (event.key === "ArrowUp") {
+            event.preventDefault();
+            setActiveIndex((index) => Math.max(index - 1, 0));
+            return;
+          }
+          if (event.key === "Enter" && results[activeIndex]) {
+            event.preventDefault();
+            goTo(results[activeIndex].id);
+          }
+        }}
+        placeholder="Search solutions"
+        aria-label="Search solutions"
+        autoComplete="off"
+        spellCheck={false}
+      />
+      {query ? (
+        <button
+          type="button"
+          className="pp-search__clear"
+          aria-label="Clear search"
+          onClick={() => {
+            setQuery("");
+            setOpen(false);
+          }}
+        >
+          <X />
+        </button>
+      ) : null}
+      {open && query.trim() ? (
+        <div className="pp-search__results" role="listbox">
+          {results.length === 0 ? (
+            <p className="pp-search__empty">No matching solutions</p>
+          ) : (
+            results.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                role="option"
+                aria-selected={index === activeIndex}
+                className={`pp-search__result ${index === activeIndex ? "is-active" : ""}`}
+                onMouseEnter={() => setActiveIndex(index)}
+                onClick={() => goTo(item.id)}
+              >
+                <span className="pp-search__result-title">{item.title}</span>
+                <span className="pp-search__result-section">{item.section}</span>
+              </button>
+            ))
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 function SectionTitle({ children }: { children: ReactNode }) {
   return (
@@ -192,25 +537,28 @@ function PricingPage() {
       <SiteNav />
 
       <nav className="pp-subnav" aria-label="Pricing sections">
-        <div className="pp-tabs" ref={tabsRef}>
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              className={`pp-tab ${activeTab === tab.id ? "is-active" : ""}`}
-              onClick={() => {
-                document.getElementById(tab.id)?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              {tab.label}
-            </button>
-          ))}
+        <div className="pp-subnav__inner">
+          <div className="pp-tabs" ref={tabsRef}>
+            {TABS.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                className={`pp-tab ${activeTab === tab.id ? "is-active" : ""}`}
+                onClick={() => {
+                  document.getElementById(tab.id)?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          <SolutionsSearch />
         </div>
       </nav>
 
       <header className="pp-hero">
         <PageHeroHeading className="pp-serif mx-auto max-w-[16ch] text-center">
-          Simple, transparent <Accent>pricing</Accent>
+          Choose the right <Accent>plan</Accent> for you
         </PageHeroHeading>
         <p>
           <span className="pp-hero-line">
@@ -252,6 +600,7 @@ function PricingPage() {
           <div className="pp-grid">
             <PricingCard
               full
+              id="growth-marketing"
               name="Growth Marketing"
               price="$5,000"
               unit="/ month"
@@ -272,6 +621,7 @@ function PricingPage() {
             />
             <PricingCard
               full
+              id="seo-geo-aeo"
               name="SEO, GEO & AEO"
               price="$2,500"
               unit="/ month"
@@ -298,6 +648,7 @@ function PricingPage() {
           <div className="pp-grid">
             <PricingCard
               full
+              id="branding"
               name="Branding & Identity"
               price="$5,000"
               image={solutionsBranding}
@@ -309,6 +660,7 @@ function PricingPage() {
             />
             <PricingCard
               full
+              id="uiux"
               name="UI/UX & Website Design"
               price="$10,000"
               image={designUiux}
@@ -334,6 +686,7 @@ function PricingPage() {
           <div className="pp-grid">
             <PricingCard
               full
+              id="ai-automation"
               name="AI Automation"
               price="$5,000"
               image={aiAutomation}
@@ -354,6 +707,7 @@ function PricingPage() {
             />
             <PricingCard
               full
+              id="custom-ai"
               name="Custom AI & Technology"
               price="Custom"
               image={solutionsAiTech}
@@ -372,6 +726,7 @@ function PricingPage() {
           <div className="pp-grid">
             <PricingCard
               full
+              id="growth-consulting"
               name="Healthcare Growth Consulting"
               price="$5,000"
               image={solutionsConsulting}
@@ -400,6 +755,7 @@ function PricingPage() {
           <div className="pp-grid">
             <PricingCard
               full
+              id="drone-videography"
               name="Drone Videography"
               price="$2,500"
               image={workCampus}

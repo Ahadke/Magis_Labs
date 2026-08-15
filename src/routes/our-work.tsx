@@ -174,39 +174,6 @@ const WEB_CASES = [
   },
 ] as const;
 
-function CarouselControls({
-  onPrev,
-  onNext,
-  prevLabel,
-  nextLabel,
-}: {
-  onPrev: () => void;
-  onNext: () => void;
-  prevLabel: string;
-  nextLabel: string;
-}) {
-  return (
-    <div className="ow-carousel-controls">
-      <button
-        type="button"
-        className="ow-carousel-btn"
-        aria-label={prevLabel}
-        onClick={onPrev}
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </button>
-      <button
-        type="button"
-        className="ow-carousel-btn"
-        aria-label={nextLabel}
-        onClick={onNext}
-      >
-        <ChevronRight className="h-4 w-4" />
-      </button>
-    </div>
-  );
-}
-
 type IgCase = (typeof IG_CASES)[number];
 
 function ringOffset(index: number, active: number, total: number): number {
@@ -529,17 +496,9 @@ function OurWorkPage() {
                 <Eyebrow>Testimonials</Eyebrow>
               </Reveal>
               <Reveal>
-                <div className="ow-section-title-row">
-                  <h2>
-                    Feeds that now <Accent>convert</Accent>, not just scroll.
-                  </h2>
-                  <CarouselControls
-                    prevLabel="Previous Instagram case"
-                    nextLabel="Next Instagram case"
-                    onPrev={igPrev}
-                    onNext={igNext}
-                  />
-                </div>
+                <h2>
+                  Feeds that now <Accent>convert</Accent>, not just scroll.
+                </h2>
               </Reveal>
               <Reveal>
                 <p className="ow-section-desc">
@@ -579,12 +538,6 @@ function OurWorkPage() {
                 </p>
               </Reveal>
             </div>
-            <CarouselControls
-              prevLabel="Previous website case"
-              nextLabel="Next website case"
-              onPrev={webPrev}
-              onNext={webNext}
-            />
           </div>
         </div>
 

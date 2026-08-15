@@ -52,7 +52,7 @@ const LINKEDIN = "https://www.linkedin.com/showcase/the-magis-labs/";
 
 function ContactPage() {
   return (
-    <div className="min-h-screen">
+    <div className="contact-page min-h-screen">
       <SiteNav />
 
       {/* 1 — HERO */}
@@ -78,11 +78,11 @@ function ContactPage() {
       >
         <div className="mx-auto grid max-w-[1320px] gap-4 lg:grid-cols-[1fr_340px]">
           <Reveal>
-            <article className="grain-card flex h-full flex-col rounded-[36px] p-3 md:p-4">
+            <article className="grain-card flex h-full flex-col rounded-none p-3 md:p-4">
               <SectionHeading className="px-4 pb-0 pt-2 text-[1.8rem] md:text-[2.1rem]">
                 Book a <Accent>Call</Accent>
               </SectionHeading>
-              <div className="mt-2 rounded-[26px] bg-white/85">
+              <div className="mt-2 rounded-none bg-white/85">
                 <CalEmbed />
               </div>
             </article>
@@ -118,7 +118,7 @@ function ContactPage() {
 
       {/* 3 — NEWSLETTER */}
       <section id="newsletter" className="scroll-mt-24 px-6 py-10 md:px-10 md:py-14">
-        <div className="grain-card mx-auto max-w-[1120px] rounded-[38px] px-8 py-10 md:px-14 md:py-14">
+        <div className="grain-card mx-auto w-full max-w-[1320px] rounded-none px-8 py-10 md:px-14 md:py-14">
           <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between md:gap-12">
             <div className="min-w-0 flex-1 text-left md:max-w-[560px]">
               <Reveal>
@@ -148,7 +148,7 @@ function ContactPage() {
 
       {/* 4 — CAREERS */}
       <section id="join" className="scroll-mt-24 px-6 py-10 md:px-10 md:py-14">
-        <div className="grain-card mx-auto w-full max-w-[1320px] rounded-[38px] px-8 py-10 md:px-14 md:py-14">
+        <div className="grain-card mx-auto w-full max-w-[1320px] rounded-none px-8 py-10 md:px-14 md:py-14">
           <Reveal>
             <div className="max-w-2xl">
               <SectionHeading>
@@ -197,7 +197,7 @@ function PubCard({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="surface-card surface-card--lift group flex w-full max-w-[420px] items-center gap-4 rounded-[22px] p-4"
+      className="surface-card surface-card--lift group flex w-full max-w-[420px] items-center gap-4 rounded-none p-4"
     >
       <img
         src={img}
@@ -244,7 +244,7 @@ function SideCard({
   accent: string;
 }) {
   return (
-    <article className="grain-card grain-card--lift flex h-full flex-col rounded-[30px] p-7 md:p-8">
+    <article className="grain-card grain-card--lift flex h-full flex-col rounded-none p-7 md:p-8">
       <div className="flex items-center gap-4">
         <span
           className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-white"
@@ -265,7 +265,7 @@ function SideCard({
       <a
         href={href}
         {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-        className="group mt-6 inline-flex items-center justify-center gap-2 self-start rounded-full px-7 py-3.5 text-[13px] font-semibold tracking-wide text-white transition-all duration-500 hover:-translate-y-[2px]"
+        className="group mt-6 inline-flex items-center justify-center gap-2 self-start rounded-none px-7 py-3.5 text-[13px] font-semibold tracking-wide text-white transition-all duration-500 hover:-translate-y-[2px]"
         style={{ background: accent, boxShadow: `0 20px 44px -26px ${accent}` }}
       >
         {cta}
@@ -300,7 +300,7 @@ const FIELDS = [
 type FieldName = (typeof FIELDS)[number]["name"] | "message";
 
 const inputClass =
-  "mt-3 w-full rounded-2xl border border-black/[0.08] bg-white px-5 py-4 text-[15.5px] text-black outline-none transition-all duration-300 placeholder:text-black/25 focus:border-[#8C2860] focus:shadow-[0_0_0_4px_rgba(140,40,96,0.09)]";
+  "mt-3 w-full rounded-none border border-black/[0.08] bg-white px-5 py-4 text-[15.5px] text-black outline-none transition-all duration-300 placeholder:text-black/25 focus:border-[#8C2860] focus:shadow-[0_0_0_4px_rgba(140,40,96,0.09)]";
 
 const labelClass =
   "block text-[11px] font-semibold uppercase tracking-[0.24em] text-black/40";
@@ -369,7 +369,7 @@ function ApplicationForm() {
 
   if (sent) {
     return (
-      <div className="surface-card flex min-h-[320px] flex-col items-center justify-center rounded-[40px] bg-white p-9 text-center md:p-14">
+      <div className="surface-card flex min-h-[320px] flex-col items-center justify-center rounded-none bg-white p-9 text-center md:p-14">
         <span
           className="inline-flex h-14 w-14 items-center justify-center rounded-full text-white"
           style={{ background: ELDERBERRY }}
@@ -389,7 +389,7 @@ function ApplicationForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="surface-card rounded-[36px] bg-white p-7 md:p-12"
+      className="surface-card rounded-none bg-white p-7 md:p-12"
       noValidate
     >
       <div className="grid gap-6 sm:grid-cols-2">
@@ -428,10 +428,10 @@ function ApplicationForm() {
           />
           {file ? (
             <div
-              className="mt-3 flex items-center gap-4 rounded-2xl px-5 py-4"
+              className="mt-3 flex items-center gap-4 rounded-none px-5 py-4"
               style={{
-                background: "rgba(155,74,128,0.06)",
-                border: "1px solid rgba(155,74,128,0.20)",
+                background: "rgba(140,40,96),0.06)",
+                border: "1px solid rgba(140,40,96),0.20)",
               }}
             >
               <FileText
@@ -464,12 +464,12 @@ function ApplicationForm() {
                 setDragging(false);
                 accept(e.dataTransfer.files?.[0]);
               }}
-              className="mt-3 flex w-full flex-col items-center justify-center rounded-3xl px-6 py-11 text-center transition-all duration-300"
+              className="mt-3 flex w-full flex-col items-center justify-center rounded-none px-6 py-11 text-center transition-all duration-300"
               style={{
-                border: `1.5px dashed ${dragging ? ELDERBERRY : "rgba(155,74,128,0.28)"}`,
+                border: `1.5px dashed ${dragging ? ELDERBERRY : "rgba(140,40,96),0.28)"}`,
                 background: dragging
                   ? "rgba(140,40,96,0.05)"
-                  : "rgba(155,74,128,0.025)",
+                  : "rgba(140,40,96),0.025)",
               }}
             >
               <UploadCloud
@@ -509,7 +509,7 @@ function ApplicationForm() {
 
       <button
         type="submit"
-        className="mt-10 inline-flex w-full items-center justify-center gap-2 rounded-full px-9 py-5 text-[14px] font-semibold tracking-wide text-white transition-all duration-500 hover:-translate-y-[2px]"
+        className="mt-10 inline-flex w-full items-center justify-center gap-2 rounded-none px-9 py-5 text-[14px] font-semibold tracking-wide text-white transition-all duration-500 hover:-translate-y-[2px]"
         style={{
           background: ELDERBERRY,
           boxShadow: "0 26px 56px -24px rgba(140,40,96,0.65)",

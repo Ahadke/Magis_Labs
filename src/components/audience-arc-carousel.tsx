@@ -40,7 +40,7 @@ function wrapDelta(index: number, progress: number, total: number) {
 /**
  * Full-width 3D arc: 4 cards, ~1cm gaps, visible concave arch.
  * Spacing via translateX; arch via rotateY + bowl translateZ.
- * No auto-rotate — drag, edge hover, and click only.
+ * Slow clockwise auto-spin; hover middle stops; hover edges reverse.
  */
 export function AudienceArcCarousel({ items }: { items: readonly AudienceArcItem[] }) {
   const total = items.length;
@@ -209,20 +209,28 @@ export function AudienceArcCarousel({ items }: { items: readonly AudienceArcItem
     }
   };
 
-  // Edge hover nudge
+  // Slow clockwise auto-spin; hover middle stops; hover left/right reverse directions
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
 
     let raf = 0;
-    let dir = 0;
+    let hoverDir: -1 | 0 | 1 | null = null; // null = auto clockwise
 
     const tick = () => {
-      if (dir !== 0 && !dragRef.current.active && !autoPausedRef.current) {
-        progressRef.current += dir * 0.008;
-        if (progressRef.current >= total) progressRef.current -= total;
-        if (progressRef.current < 0) progressRef.current += total;
-        applyTransforms(progressRef.current);
+      if (!dragRef.current.active && !autoPausedRef.current) {
+        const autoClockwise = 0.0016;
+        const edgeSpeed = 0.01;
+        let step = autoClockwise;
+        if (hoverDir === 0) step = 0;
+        else if (hoverDir === 1) step = edgeSpeed;
+        else if (hoverDir === -1) step = -edgeSpeed;
+        if (step !== 0) {
+          progressRef.current += step;
+          if (progressRef.current >= total) progressRef.current -= total;
+          if (progressRef.current < 0) progressRef.current += total;
+          applyTransforms(progressRef.current);
+        }
       }
       raf = requestAnimationFrame(tick);
     };
@@ -232,12 +240,12 @@ export function AudienceArcCarousel({ items }: { items: readonly AudienceArcItem
       if (dragRef.current.active) return;
       const rect = stage.getBoundingClientRect();
       const t = (e.clientX - rect.left) / rect.width;
-      if (t < 0.2) dir = -1;
-      else if (t > 0.8) dir = 1;
-      else dir = 0;
+      if (t < 0.28) hoverDir = -1;
+      else if (t > 0.72) hoverDir = 1;
+      else hoverDir = 0;
     };
     const onLeave = () => {
-      dir = 0;
+      hoverDir = null;
     };
 
     stage.addEventListener("pointermove", onMove);

@@ -23,14 +23,21 @@ const CONNECT_LINKS = [
   { label: "Book a Call", to: "/contact" as const, hash: "book" as const },
 ] as const;
 
+const LEGAL_LINKS = [
+  { label: "Privacy", to: "/privacy" as const },
+  { label: "Terms & Conditions", to: "/terms" as const },
+] as const;
+
+type FooterLink = {
+  label: string;
+  to: "/" | "/about" | "/our-work" | "/pricing" | "/contact" | "/privacy" | "/terms";
+  hash?: "vision" | "focus" | "capabilities" | "newsletter" | "join" | "book";
+};
+
 function FooterLinkList({
   links,
 }: {
-  links: readonly {
-    label: string;
-    to: "/" | "/about" | "/our-work" | "/pricing" | "/contact";
-    hash?: "vision" | "focus" | "capabilities" | "newsletter" | "join" | "book";
-  }[];
+  links: readonly FooterLink[];
 }) {
   return (
     <ul className="mt-3 space-y-2">
@@ -54,11 +61,7 @@ function FooterColumn({
   links,
 }: {
   title: string;
-  links: readonly {
-    label: string;
-    to: "/" | "/about" | "/our-work" | "/pricing" | "/contact";
-    hash?: "vision" | "focus" | "capabilities" | "newsletter" | "join" | "book";
-  }[];
+  links: readonly FooterLink[];
 }) {
   return (
     <div>
@@ -73,8 +76,8 @@ function FooterColumn({
 export function SiteFooter() {
   return (
     <footer className="site-footer relative bg-black text-white">
-      <div className="mx-auto max-w-[1500px] px-6 py-10 md:px-10 md:py-12">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(220px,1.1fr)_1fr_1fr_1fr] lg:gap-8 xl:gap-12">
+      <div className="mx-auto max-w-[1500px] px-6 pt-10 pb-5 md:px-10 md:pt-12 md:pb-6">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(220px,1.1fr)_1fr_1fr_1fr_1fr] lg:gap-8 xl:gap-12">
           <div className="sm:col-span-2 lg:col-span-1">
             <Link to="/" className="inline-flex items-center gap-2.5">
               <img
@@ -83,7 +86,7 @@ export function SiteFooter() {
                 className="h-8 w-8 rounded-full object-cover"
               />
               <span className="font-display text-[19px] font-bold tracking-tight">
-                <span style={{ color: "#B86A9A" }}>Magis</span>
+                <span style={{ color: "#8C2860" }}>Magis</span>
                 <span className="text-white">Labs</span>
               </span>
             </Link>
@@ -95,7 +98,7 @@ export function SiteFooter() {
                 href={`mailto:${EMAIL}`}
                 className="inline-flex items-center gap-1.5 text-[13px] text-white/72 transition-colors hover:text-white"
               >
-                <Mail className="h-3.5 w-3.5 text-[#B86A9A]" />
+                <Mail className="h-3.5 w-3.5 text-[#8C2860]" />
                 {EMAIL}
               </a>
               <a
@@ -113,35 +116,16 @@ export function SiteFooter() {
           <FooterColumn title="Explore" links={COLUMN_ONE_LINKS} />
           <FooterColumn title="Discover" links={COLUMN_TWO_LINKS} />
           <FooterColumn title="Connect" links={CONNECT_LINKS} />
+          <FooterColumn title="Legal" links={LEGAL_LINKS} />
         </div>
 
-        <div className="site-footer__legal mt-8 border-t border-white/10 pt-5">
-          <div className="flex flex-col items-center gap-3 text-center">
-            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11.5px] text-white/52">
-              <span>© {new Date().getFullYear()} Magis Labs Co. All rights reserved.</span>
-              <span aria-hidden className="hidden sm:inline text-white/22">
-                ·
-              </span>
-              <Link
-                to="/privacy"
-                className="text-white/72 transition-colors hover:text-white"
-              >
-                Privacy
-              </Link>
-              <span aria-hidden className="text-white/22">
-                ·
-              </span>
-              <Link
-                to="/terms"
-                className="text-white/72 transition-colors hover:text-white"
-              >
-                Terms &amp; Conditions
-              </Link>
-            </div>
-            <p className="font-display text-[12.5px] italic tracking-[0.02em] text-white/42">
-              Built for better care
-            </p>
-          </div>
+        <div className="site-footer__legal relative mt-6 border-t border-white/10 pt-4">
+          <p className="text-left text-[11.5px] text-white/52">
+            © {new Date().getFullYear()} Magis Labs Co. All rights reserved.
+          </p>
+          <p className="pointer-events-none absolute inset-x-0 top-4 text-center font-display text-[14.5px] italic tracking-[0.02em] text-[#8C2860]">
+            Built for better care
+          </p>
         </div>
       </div>
     </footer>

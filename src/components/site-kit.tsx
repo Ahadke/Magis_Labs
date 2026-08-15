@@ -5,7 +5,7 @@ import { ArrowRight, Check, Minus, Plus } from "lucide-react";
 import { subscribeToNewsletter } from "@/lib/subscribe.functions";
 
 export const ELDERBERRY = "#8C2860";
-export const TWILIGHT = "#9B4A80";
+export const TWILIGHT = "#8C2860";
 export const CHAMPAGNE = "#E4CBA5";
 
 /* ------------------------------ Reveal ------------------------------ */
@@ -153,7 +153,7 @@ export function SolidButton({
   children: ReactNode;
   className?: string;
 }) {
-  const cls = `group inline-flex items-center gap-2 rounded-full px-7 py-4 text-[13px] font-semibold tracking-wide text-white transition-all duration-500 hover:-translate-y-[2px] ${className}`;
+  const cls = `group inline-flex items-center gap-2 rounded-[8px] px-7 py-4 text-[13px] font-semibold tracking-wide text-white transition-all duration-500 hover:-translate-y-[2px] ${className}`;
   const style = {
     background: `linear-gradient(135deg, ${ELDERBERRY} 0%, ${TWILIGHT} 100%)`,
     boxShadow: "0 22px 50px -22px rgba(140,40,96,0.65)",
@@ -190,7 +190,7 @@ export function GhostButton({
   children: ReactNode;
   className?: string;
 }) {
-  const cls = `group inline-flex items-center gap-2 rounded-full border px-7 py-4 text-[13px] font-semibold tracking-wide transition-all duration-500 hover:-translate-y-[2px] hover:bg-black/[0.03] ${className}`;
+  const cls = `group inline-flex items-center gap-2 rounded-[8px] border px-7 py-4 text-[13px] font-semibold tracking-wide transition-all duration-500 hover:-translate-y-[2px] hover:bg-black/[0.03] ${className}`;
   const style = { borderColor: "rgba(0,0,0,0.14)", color: "#111" };
   const inner = (
     <>
@@ -322,7 +322,7 @@ export function NewsletterForm({
   return (
     <form onSubmit={onSubmit} className="w-full max-w-lg">
       <div
-        className={`flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:border sm:p-1.5 ${
+        className={`flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-2 sm:rounded-none sm:border sm:p-1.5 ${
           whiteSurface ? "border-black/[0.08] bg-white shadow-[0_8px_24px_-16px_rgba(0,0,0,0.08)]" : ""
         }`}
         style={{
@@ -339,7 +339,7 @@ export function NewsletterForm({
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@organisation.com"
           aria-label="Email address"
-          className={`w-full rounded-full border px-5 py-3.5 text-[14px] outline-none sm:py-2.5 ${
+          className={`w-full rounded-none border px-5 py-3.5 text-[14px] outline-none sm:py-2.5 ${
             whiteSurface
               ? "border-black/[0.08] bg-white text-black placeholder:text-black/40 sm:border-0"
               : dark
@@ -355,7 +355,7 @@ export function NewsletterForm({
         <button
           type="submit"
           disabled={state === "loading"}
-          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[13px] font-semibold text-white transition-all duration-300 hover:-translate-y-[1px] disabled:opacity-60 sm:py-3"
+          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-[8px] px-6 py-3.5 text-[13px] font-semibold text-white transition-all duration-300 hover:-translate-y-[1px] disabled:opacity-60 sm:py-3"
           style={{
             background: `linear-gradient(135deg, ${ELDERBERRY} 0%, ${TWILIGHT} 100%)`,
           }}

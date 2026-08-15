@@ -38,9 +38,7 @@ export function SiteNav() {
   }, []);
 
   const linkColor = navLinkColor(blend);
-  const labsColor = isHome
-    ? `rgba(${mixChannel(255, 107, blend)}, ${mixChannel(255, 114, blend)}, ${mixChannel(255, 128, blend)}, ${mixChannel(0.82, 1, blend)})`
-    : "#6B7280";
+  const labsColor = "#484C56";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 w-full">
@@ -64,7 +62,7 @@ export function SiteNav() {
               className="h-9 w-9 rounded-full object-cover"
             />
             <span className="font-display text-[22px] font-bold tracking-tight">
-              <span style={{ color: "#9B4A80" }}>Magis</span>
+              <span style={{ color: "#8C2860" }}>Magis</span>
               <span style={{ color: labsColor }}>Labs</span>
             </span>
           </Link>

@@ -45,18 +45,18 @@ export function CtaDnaIllustration() {
       <defs>
         <linearGradient id="ow-dna-strand-front" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#fffdfb" />
-          <stop offset="42%" stopColor="#f7e8f0" />
-          <stop offset="100%" stopColor="#ddb8cc" />
+          <stop offset="42%" stopColor="#8C2860" />
+          <stop offset="100%" stopColor="#8C2860" />
         </linearGradient>
         <linearGradient id="ow-dna-strand-back" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#f3ddea" />
-          <stop offset="55%" stopColor="#e8c8d8" />
-          <stop offset="100%" stopColor="#c995b0" />
+          <stop offset="0%" stopColor="#8C2860" />
+          <stop offset="55%" stopColor="#8C2860" />
+          <stop offset="100%" stopColor="#6E1C4A" />
         </linearGradient>
         <linearGradient id="ow-dna-rung" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#f8edf3" />
+          <stop offset="0%" stopColor="#8C2860" />
           <stop offset="50%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#e5c4d6" />
+          <stop offset="100%" stopColor="#8C2860" />
         </linearGradient>
         <filter id="ow-dna-shadow" x="-20%" y="-20%" width="140%" height="140%">
           <feDropShadow dx="0" dy="10" stdDeviation="12" floodColor="#5a1438" floodOpacity="0.28" />

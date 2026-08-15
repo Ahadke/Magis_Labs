@@ -240,8 +240,8 @@ function Hero() {
         <Reveal>
           <SectionIndex value="Magis Labs" />
           <h1 className="hp-hero__headline font-display">
-            <span className="hp-hero__headline-line">Healthcare,</span>
-            <span className="hp-hero__headline-line">built for what&apos;s next.</span>
+            <span className="hp-hero__headline-line">Crafting the future of</span>
+            <span className="hp-hero__headline-line">modern healthcare</span>
           </h1>
           <p className="hp-hero__subhead">
             Branding, content, AI, and growth for every kind of healthcare

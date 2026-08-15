@@ -31,7 +31,7 @@ function ResourcesPage() {
             <PageHeroHeading>
               Resources <Accent>Coming Soon</Accent>
             </PageHeroHeading>
-            <p className="mx-auto mt-7 max-w-[42ch] text-[17px] leading-[1.75] text-black/55">
+            <p className="mx-auto mt-7 max-w-[42ch] text-[17px] leading-[1.75] text-[#4D4D4C]">
               We&apos;re building a library of healthcare growth insights,
               research, and practical guides. Check back soon — or subscribe on
               our contact page in the meantime.
