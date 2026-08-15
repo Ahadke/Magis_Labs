@@ -1,14 +1,15 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import logoBonsai from "@/assets/logo-bonsai-gradient-bg.png";
+import { SOLUTION_NAV_ITEMS } from "@/data/solutions-nav";
 
 const NAV = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Solutions", href: "/pricing" },
-  { label: "Insights", href: "/our-work" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/" as const },
+  { label: "About", href: "/about" as const },
+  { label: "Solutions", href: "/pricing" as const },
+  { label: "Insights", href: "/our-work" as const },
+  { label: "Contact", href: "/contact" as const },
 ] as const;
 
 const NAV_FADE_DISTANCE = 120;
@@ -24,9 +25,14 @@ function navLinkColor(blend: number) {
 export function SiteNav() {
   const [scrollY, setScrollY] = useState(0);
   const [open, setOpen] = useState(false);
-  const isHome = useRouterState({
-    select: (state) => state.location.pathname === "/",
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
+  const solutionsRef = useRef<HTMLDivElement>(null);
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
   });
+  const isHome = pathname === "/";
+  const isSolutions = pathname === "/pricing";
   const blend = isHome ? Math.min(1, scrollY / NAV_FADE_DISTANCE) : 1;
   const onHero = isHome && blend < 0.35;
 
@@ -37,8 +43,19 @@ export function SiteNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const onPointerDown = (event: PointerEvent) => {
+      if (!solutionsRef.current?.contains(event.target as Node)) {
+        setSolutionsOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, []);
+
   const linkColor = navLinkColor(blend);
   const labsColor = "#484C56";
+  const activeColor = blend < 0.5 && isHome ? "#fff" : "#8C2860";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 w-full">
@@ -68,30 +85,73 @@ export function SiteNav() {
           </Link>
 
           <nav className="hidden items-center gap-0.5 lg:flex">
-            {NAV.map((item) => (
-              <Link
-                key={item.label}
-                to={item.href}
-                {...("hash" in item && item.hash ? { hash: item.hash } : {})}
-                activeProps={{ style: { color: blend < 0.5 && isHome ? "#fff" : "#8C2860" } }}
-                activeOptions={{
-                  exact: item.href === "/" && !("hash" in item && item.hash),
-                }}
-                className="rounded-[10px] px-3.5 py-2 text-[13.5px] font-medium tracking-wide transition-colors duration-200"
-                style={{
-                  color: linkColor,
-                }}
-                onMouseEnter={(e) => {
-                  if (onHero) e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-                  else e.currentTarget.style.background = "rgba(0,0,0,0.04)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item) =>
+              item.label === "Solutions" ? (
+                <div
+                  key={item.label}
+                  className="site-nav-dd"
+                  ref={solutionsRef}
+                  onMouseEnter={() => setSolutionsOpen(true)}
+                  onMouseLeave={() => setSolutionsOpen(false)}
+                >
+                  <Link
+                    to="/pricing"
+                    className="site-nav-dd__trigger rounded-[10px] px-3.5 py-2 text-[13.5px] font-medium tracking-wide transition-colors duration-200"
+                    style={{ color: isSolutions ? activeColor : linkColor }}
+                    aria-expanded={solutionsOpen}
+                    aria-haspopup="true"
+                    onMouseEnter={(e) => {
+                      if (onHero) e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+                      else e.currentTarget.style.background = "rgba(0,0,0,0.04)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "transparent";
+                    }}
+                  >
+                    Solutions
+                    <ChevronDown className={`site-nav-dd__chevron ${solutionsOpen ? "is-open" : ""}`} />
+                  </Link>
+                  {solutionsOpen ? (
+                    <div className="site-nav-dd__menu" role="menu">
+                      {SOLUTION_NAV_ITEMS.map((tab) => (
+                        <Link
+                          key={tab.id}
+                          to="/pricing"
+                          hash={tab.id}
+                          role="menuitem"
+                          className="site-nav-dd__item"
+                          onClick={() => setSolutionsOpen(false)}
+                        >
+                          {tab.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  activeProps={{ style: { color: activeColor } }}
+                  activeOptions={{
+                    exact: item.href === "/",
+                  }}
+                  className="rounded-[10px] px-3.5 py-2 text-[13.5px] font-medium tracking-wide transition-colors duration-200"
+                  style={{
+                    color: linkColor,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (onHero) e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+                    else e.currentTarget.style.background = "rgba(0,0,0,0.04)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
           </nav>
 
           <div className="flex items-center gap-2">
@@ -125,18 +185,58 @@ export function SiteNav() {
               backdropFilter: onHero ? "blur(20px)" : "none",
             }}
           >
-            {NAV.map((item) => (
-              <Link
-                key={item.label}
-                to={item.href}
-                {...("hash" in item && item.hash ? { hash: item.hash } : {})}
-                onClick={() => setOpen(false)}
-                className="block rounded-xl px-3 py-3 text-[15px] font-medium transition-colors"
-                style={{ color: onHero ? "rgba(255,255,255,0.82)" : "rgba(0,0,0,0.75)" }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item) =>
+              item.label === "Solutions" ? (
+                <div key={item.label}>
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-medium"
+                    style={{ color: onHero ? "rgba(255,255,255,0.82)" : "rgba(0,0,0,0.75)" }}
+                    aria-expanded={mobileSolutionsOpen}
+                    onClick={() => setMobileSolutionsOpen((v) => !v)}
+                  >
+                    Solutions
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${mobileSolutionsOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {mobileSolutionsOpen ? (
+                    <div className="mb-1 ml-2 border-l border-black/10 pl-3">
+                      <Link
+                        to="/pricing"
+                        onClick={() => setOpen(false)}
+                        className="block rounded-xl px-3 py-2.5 text-[14px] font-medium"
+                        style={{ color: onHero ? "rgba(255,255,255,0.82)" : "rgba(0,0,0,0.75)" }}
+                      >
+                        All solutions
+                      </Link>
+                      {SOLUTION_NAV_ITEMS.map((tab) => (
+                        <Link
+                          key={tab.id}
+                          to="/pricing"
+                          hash={tab.id}
+                          onClick={() => setOpen(false)}
+                          className="block rounded-xl px-3 py-2.5 text-[14px] font-medium"
+                          style={{ color: onHero ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.62)" }}
+                        >
+                          {tab.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl px-3 py-3 text-[15px] font-medium transition-colors"
+                  style={{ color: onHero ? "rgba(255,255,255,0.82)" : "rgba(0,0,0,0.75)" }}
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
             <Link
               to="/contact"
               hash="book"

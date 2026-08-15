@@ -78,14 +78,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Magis Labs — Helping Eldercare Businesses Grow, Scale, and Innovate with AI" },
+      { title: "Magis Labs - Helping Eldercare Businesses Grow, Scale, and Innovate with AI" },
       {
         name: "description",
         content:
           "Magis Labs partners with eldercare organizations to accelerate growth through AI, marketing, and long-term business strategy.",
       },
       { name: "author", content: "Magis Labs Co" },
-      { property: "og:title", content: "Magis Labs — Helping Eldercare Businesses Scale" },
+      { property: "og:title", content: "Magis Labs - Helping Eldercare Businesses Scale" },
       {
         property: "og:description",
         content:

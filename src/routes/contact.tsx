@@ -28,11 +28,11 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
   head: () => ({
     meta: [
-      { title: "Contact — Where Great Partnerships Begin | Magis Labs" },
+      { title: "Contact - Where Great Partnerships Begin | Magis Labs" },
       {
         name: "description",
         content:
-          "Book a strategy call, email us, or connect on LinkedIn. Subscribe for insights on healthcare AI, storytelling and growth — or apply to build with Magis Labs.",
+          "Book a strategy call, email us, or connect on LinkedIn. Subscribe for insights on healthcare AI, storytelling and growth - or apply to build with Magis Labs.",
       },
       { property: "og:title", content: "Where Great Partnerships Begin" },
       {
@@ -55,7 +55,7 @@ function ContactPage() {
     <div className="contact-page min-h-screen">
       <SiteNav />
 
-      {/* 1 — HERO */}
+      {/* 1 - HERO */}
       <section className="px-6 pt-[86px] md:px-10 md:pt-[112px]">
         <div className="mx-auto max-w-[1240px]">
           <Reveal>
@@ -71,7 +71,7 @@ function ContactPage() {
         </div>
       </section>
 
-      {/* 2 — BOOKING + CONTACT */}
+      {/* 2 - BOOKING + CONTACT */}
       <section
         id="book"
         className="mt-2 scroll-mt-24 px-6 py-8 md:mt-3 md:px-10 md:py-10"
@@ -116,7 +116,7 @@ function ContactPage() {
         </div>
       </section>
 
-      {/* 3 — NEWSLETTER */}
+      {/* 3 - NEWSLETTER */}
       <section id="newsletter" className="scroll-mt-24 px-6 py-10 md:px-10 md:py-14">
         <div className="grain-card mx-auto w-full max-w-[1320px] rounded-none px-8 py-10 md:px-14 md:py-14">
           <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between md:gap-12">
@@ -146,7 +146,7 @@ function ContactPage() {
         </div>
       </section>
 
-      {/* 4 — CAREERS */}
+      {/* 4 - CAREERS */}
       <section id="join" className="scroll-mt-24 px-6 py-10 md:px-10 md:py-14">
         <div className="grain-card mx-auto w-full max-w-[1320px] rounded-none px-8 py-10 md:px-14 md:py-14">
           <Reveal>
@@ -156,14 +156,7 @@ function ContactPage() {
               </SectionHeading>
               <p className="mt-5 max-w-[42ch] text-[16px] leading-[1.75] text-black/50">
                 Join the studio and help healthcare brands tell stories that
-                build trust. Send your application to{" "}
-                <a
-                  href={`mailto:${RECRUITING}`}
-                  className="font-medium text-[#8C2860] hover:underline"
-                >
-                  {RECRUITING}
-                </a>
-                .
+                build trust. Send your application today.
               </p>
             </div>
           </Reveal>
@@ -286,7 +279,7 @@ const schema = z.object({
   message: z
     .string()
     .trim()
-    .min(20, "Tell us a little more — at least a couple of sentences.")
+    .min(20, "Tell us a little more - at least a couple of sentences.")
     .max(2000),
 });
 
@@ -353,8 +346,8 @@ function ApplicationForm() {
     const body = [
       `Applicant Name: ${d.name}`,
       `Email Address: ${d.email}`,
-      `LinkedIn: ${d.linkedin || "—"}`,
-      `Portfolio: ${d.portfolio || "—"}`,
+      `LinkedIn: ${d.linkedin || "-"}`,
+      `Portfolio: ${d.portfolio || "-"}`,
       `Resume: ${file.name} (attached)`,
       "",
       "Why Magis Labs:",

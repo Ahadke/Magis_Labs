@@ -17,13 +17,13 @@ export const Route = createFileRoute("/our-work")({
   component: OurWorkPage,
   head: () => ({
     meta: [
-      { title: "Our Work — Testimonials & Client Stories | Magis Labs" },
+      { title: "Our Work - Testimonials & Client Stories | Magis Labs" },
       {
         name: "description",
         content:
           "Client testimonials and proven results from healthcare clinics, practices, and organizations we've helped grow.",
       },
-      { property: "og:title", content: "Our Work — Magis Labs" },
+      { property: "og:title", content: "Our Work - Magis Labs" },
       {
         property: "og:description",
         content:
@@ -55,7 +55,7 @@ const IG_CASES = [
     growthPeriod: "6 months",
     growthPct: "+14%",
     quote:
-      "At our size, big jumps aren't realistic. Steady growth, cleaner visuals, and fewer random posts — that's what we wanted.",
+      "At our size, big jumps aren't realistic. Steady growth, cleaner visuals, and fewer random posts - that's what we wanted.",
   },
   {
     initials: "SC",
@@ -69,7 +69,7 @@ const IG_CASES = [
     growthPeriod: "8 months",
     growthPct: "+32%",
     quote:
-      "Our feed used to feel scattered. Now patients save posts and message us with specific questions — the front desk notices it.",
+      "Our feed used to feel scattered. Now patients save posts and message us with specific questions - the front desk notices it.",
   },
   {
     initials: "NG",
@@ -97,7 +97,7 @@ const IG_CASES = [
     growthPeriod: "4 months",
     growthPct: "+22%",
     quote:
-      "The content finally sounds like me in clinic — plain language, no jargon. My team doesn't have to rewrite captions anymore.",
+      "The content finally sounds like me in clinic - plain language, no jargon. My team doesn't have to rewrite captions anymore.",
   },
   {
     initials: "NM",
@@ -137,7 +137,7 @@ const WEB_CASES = [
     name: "Dr Randeep Wadhawan",
     field: "GI, Bariatric & Metabolic Surgeon · New Delhi",
     quote:
-      "The new site explains robotic surgery in plain language — patients come in already reassured.",
+      "The new site explains robotic surgery in plain language - patients come in already reassured.",
     metrics: [
       { value: "+170%", label: "Consult form submits" },
       { value: "2.8×", label: "Time on site" },
@@ -560,7 +560,7 @@ function OurWorkPage() {
           </Reveal>
           <Reveal>
             <p>
-              Tell us where things stand — we&apos;ll show you what a launch could look
+              Tell us where things stand - we&apos;ll show you what a launch could look
               like, with the numbers to back it.
             </p>
           </Reveal>

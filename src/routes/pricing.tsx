@@ -19,13 +19,13 @@ export const Route = createFileRoute("/pricing")({
   component: PricingPage,
   head: () => ({
     meta: [
-      { title: "Pricing — Transparent Healthcare Growth Services | Magis Labs" },
+      { title: "Pricing - Transparent Healthcare Growth Services | Magis Labs" },
       {
         name: "description",
         content:
           "Transparent pricing for healthcare video production, performance marketing, UI/UX design, AI automation and growth consulting.",
       },
-      { property: "og:title", content: "Pricing — Magis Labs" },
+      { property: "og:title", content: "Pricing - Magis Labs" },
       {
         property: "og:description",
         content:
@@ -36,15 +36,6 @@ export const Route = createFileRoute("/pricing")({
     ],
   }),
 });
-
-const TABS = [
-  { id: "video", label: "Video & Content" },
-  { id: "growth", label: "Growth & Marketing" },
-  { id: "brand", label: "Brand & Digital" },
-  { id: "ai", label: "AI & Technology" },
-  { id: "consulting", label: "Strategy" },
-  { id: "drone", label: "Drone" },
-];
 
 const VIDEO_CARDS = [
   {
@@ -494,72 +485,17 @@ function SectionTitle({ children }: { children: ReactNode }) {
 }
 
 function PricingPage() {
-  const [activeTab, setActiveTab] = useState("video");
-  const tabsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const sectionIds = TABS.map((t) => t.id);
-    const subnavOffset = 132;
-
-    const updateActiveTab = () => {
-      let active = sectionIds[0];
-
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        if (el.getBoundingClientRect().top <= subnavOffset) {
-          active = id;
-        }
-      }
-
-      setActiveTab(active);
-    };
-
-    updateActiveTab();
-    window.addEventListener("scroll", updateActiveTab, { passive: true });
-    window.addEventListener("resize", updateActiveTab);
-
-    return () => {
-      window.removeEventListener("scroll", updateActiveTab);
-      window.removeEventListener("resize", updateActiveTab);
-    };
-  }, []);
-
-  useEffect(() => {
-    const tabs = tabsRef.current;
-    if (!tabs) return;
-    const activeButton = tabs.querySelector<HTMLButtonElement>(".pp-tab.is-active");
-    activeButton?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  }, [activeTab]);
-
   return (
     <div className="pp-page min-h-screen">
       <SiteNav />
 
-      <nav className="pp-subnav" aria-label="Pricing sections">
-        <div className="pp-subnav__inner">
-          <div className="pp-tabs" ref={tabsRef}>
-            {TABS.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                className={`pp-tab ${activeTab === tab.id ? "is-active" : ""}`}
-                onClick={() => {
-                  document.getElementById(tab.id)?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-          <SolutionsSearch />
-        </div>
-      </nav>
-
       <header className="pp-hero">
-        <PageHeroHeading className="pp-serif mx-auto max-w-[16ch] text-center">
+        <PageHeroHeading className="pp-serif mx-auto whitespace-nowrap text-center text-[clamp(1.45rem,4.8vw,5.2rem)]">
           Choose the right <Accent>plan</Accent> for you
         </PageHeroHeading>
+        <div className="pp-hero-search">
+          <SolutionsSearch />
+        </div>
         <p>
           <span className="pp-hero-line">
             Flexible solutions for healthcare businesses, clinics, and startups at
@@ -949,7 +885,7 @@ function PricingCard({
       ]
         .filter(Boolean)
         .join(" ")}
-      style={{ scrollMarginTop: 140 }}
+      style={{ scrollMarginTop: 96 }}
     >
       {image && (
         <div

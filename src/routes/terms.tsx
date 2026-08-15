@@ -9,7 +9,7 @@ export const Route = createFileRoute("/terms")({
   component: TermsPage,
   head: () => ({
     meta: [
-      { title: "Terms & Conditions — Magis Labs" },
+      { title: "Terms & Conditions - Magis Labs" },
       {
         name: "description",
         content:

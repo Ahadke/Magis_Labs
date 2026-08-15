@@ -22,13 +22,13 @@ export type AudienceArcItem = {
   hash: "consulting" | "ai";
 };
 
-/** ~1cm at 96dpi — always kept between card edges. */
+/** ~1cm at 96dpi - always kept between card edges. */
 const GAP_PX = 38;
 /** Target cards visible across the full stage. */
 const VISIBLE_CARDS = 4;
 /** Mild yaw so faces don't swing into the 1cm gap. */
 const YAW_PER_SLOT = 10;
-/** Concave bowl depth (px) — center sits further back. */
+/** Concave bowl depth (px) - center sits further back. */
 const BOWL_Z = 90;
 
 function wrapDelta(index: number, progress: number, total: number) {
@@ -67,7 +67,7 @@ export function AudienceArcCarousel({ items }: { items: readonly AudienceArcItem
 
   const applyTransforms = (progress: number) => {
     const { cardW } = metrics;
-    // Center-to-center pitch: exact card width + 1cm — never overlap
+    // Center-to-center pitch: exact card width + 1cm - never overlap
     const pitch = cardW + GAP_PX;
     const cards = cardRefs.current;
     let nearest = 0;
@@ -87,7 +87,7 @@ export function AudienceArcCarousel({ items }: { items: readonly AudienceArcItem
       const visible = abs <= VISIBLE_CARDS / 2 + 0.35;
       const t = Math.min(1, abs / (VISIBLE_CARDS / 2));
       const x = slot * pitch;
-      // Mild arch only — no scale (scale was enlarging side cards into the gap)
+      // Mild arch only - no scale (scale was enlarging side cards into the gap)
       const rotY = -slot * YAW_PER_SLOT;
       // Concave: center further back, sides closer (no size-up compensation)
       const z = -BOWL_Z * Math.cos(slot * (Math.PI / (VISIBLE_CARDS + 0.5)));

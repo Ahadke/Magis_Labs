@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
     meta: [
-      { title: "Magis Labs — Healthcare Growth Partner" },
+      { title: "Magis Labs - Healthcare Growth Partner" },
       {
         name: "description",
         content:
@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
 });
 
 const HERO_CLIPS = [
-  heroClip04, // ambulance person walking — always first
+  heroClip04, // ambulance person walking - always first
   heroClip02,
   heroClip03,
   heroClip05,
@@ -142,7 +142,7 @@ function SectionIndex({ value }: { value: string }) {
   return <span className="hp-index">{value}</span>;
 }
 
-/* ——— HERO ——— */
+/* --- HERO --- */
 
 function HeroVideoSequence() {
   const refA = useRef<HTMLVideoElement>(null);
@@ -248,20 +248,20 @@ function Hero() {
   );
 }
 
-/* ——— WHY ——— */
+/* --- WHY --- */
 
 function WhyWeExist() {
   return (
     <section id="why" className="hp-why">
       <div className="hp-container hp-why__inner">
         <Reveal>
-          <SectionIndex value="01 — Why We Exist" />
+          <SectionIndex value="01 - Why We Exist" />
           <h2 className="hp-why__title font-display">One partner for brand and growth.</h2>
           <p className="hp-why__statement">
             Magis Labs exists to help healthcare organizations grow without losing the care that
             made them matter. Healthcare professionals spend their careers improving lives.
             Somewhere along the way, marketing, technology, and digital experiences became a second
-            job they never signed up for — a patchwork of freelancers, agencies, and software that
+            job they never signed up for - a patchwork of freelancers, agencies, and software that
             don&apos;t talk to each other. We started Magis Labs to change that. One team across
             strategy, creative, and AI, so clinics, senior living, home care, and healthtech
             companies can build a brand people trust, reach the patients who need them, and scale
@@ -274,14 +274,14 @@ function WhyWeExist() {
   );
 }
 
-/* ——— WHO WE SERVE ——— */
+/* --- WHO WE SERVE --- */
 
 function WhoWeServe() {
   return (
     <section id="focus" className="hp-audience-section">
       <div className="hp-container">
         <Reveal>
-          <SectionIndex value="02 — Who We Serve" />
+          <SectionIndex value="02 - Who We Serve" />
           <h2 className="hp-audience-section__title font-display">
             Built for every corner of healthcare.
           </h2>
@@ -297,7 +297,7 @@ function WhoWeServe() {
   );
 }
 
-/* ——— WHAT WE DO (TEASER) ——— */
+/* --- WHAT WE DO (TEASER) --- */
 
 function CapabilitiesTeaser() {
   const pills = [...SERVICE_PILLS, ...SERVICE_PILLS];
@@ -306,7 +306,7 @@ function CapabilitiesTeaser() {
     <section id="capabilities" className="hp-capabilities">
       <div className="hp-container hp-capabilities__head">
         <Reveal>
-          <SectionIndex value="04 — What We Do" />
+          <SectionIndex value="04 - What We Do" />
           <h2 className="hp-capabilities__title font-display">What we do, end to end.</h2>
           <p className="hp-capabilities__intro">
             Magis Labs brings branding, cinematic content, performance marketing, and AI-powered
@@ -338,14 +338,14 @@ function CapabilitiesTeaser() {
   );
 }
 
-/* ——— VISION ——— */
+/* --- VISION --- */
 
 function Vision() {
   return (
     <section id="vision" className="hp-vision">
       <div className="hp-container hp-vision__inner">
         <Reveal>
-          <SectionIndex value="03 — Vision" />
+          <SectionIndex value="03 - Vision" />
           <h2 className="hp-vision__title font-display">Our Vision</h2>
           <p className="hp-vision__text">
             We envision a future of modern healthcare where organizations build, innovate, and scale

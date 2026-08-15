@@ -15,7 +15,7 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
   head: () => ({
     meta: [
-      { title: "About — Magis Labs" },
+      { title: "About - Magis Labs" },
       {
         name: "description",
         content:
@@ -238,7 +238,7 @@ function AboutFuture() {
           <p className="ab-future__lead">
             We&apos;re building Magis Labs for a future where families find the
             right care faster, providers communicate with clarity, and
-            technology quietly supports a healthier day-to-day — not gets in the
+            technology quietly supports a healthier day-to-day - not gets in the
             way of it.
           </p>
         </Reveal>

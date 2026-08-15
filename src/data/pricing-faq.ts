@@ -1,11 +1,11 @@
 export const PRICING_FAQS = [
   {
     q: "What does Magis Labs do?",
-    a: "We help healthcare businesses build their brand, grow their digital presence, and scale through strategy, branding, content, video production, websites, SEO, paid marketing, AI automation, and technology — all under one team.",
+    a: "We help healthcare businesses build their brand, grow their digital presence, and scale through strategy, branding, content, video production, websites, SEO, paid marketing, AI automation, and technology - all under one team.",
   },
   {
     q: "Who do you work with?",
-    a: "Private and specialty clinics, medical groups, wellness and longevity practices, senior care and home health organizations, healthcare startups, digital health companies, medical device brands, and healthtech SaaS — locally and internationally.",
+    a: "Private and specialty clinics, medical groups, wellness and longevity practices, senior care and home health organizations, healthcare startups, digital health companies, medical device brands, and healthtech SaaS - locally and internationally.",
   },
   {
     q: "What services do you offer?",
@@ -17,11 +17,11 @@ export const PRICING_FAQS = [
   },
   {
     q: "Do you offer SEO, local search, AEO, and GEO?",
-    a: "Yes. We improve visibility across Google and local search, and optimize for AI-powered discovery through Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) — alongside traditional SEO, content, and technical improvements.",
+    a: "Yes. We improve visibility across Google and local search, and optimize for AI-powered discovery through Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) - alongside traditional SEO, content, and technical improvements.",
   },
   {
     q: "Do you build websites, offer AI automation, and produce video content?",
-    a: "Yes. We design modern healthcare websites focused on clarity and conversion; integrate AI into CRM, lead management, newsletters, and ops; and produce launch films, explainers, testimonials, social content, and facility showcases — including drone videography for campuses and care communities.",
+    a: "Yes. We design modern healthcare websites focused on clarity and conversion; integrate AI into CRM, lead management, newsletters, and ops; and produce launch films, explainers, testimonials, social content, and facility showcases - including drone videography for campuses and care communities.",
   },
   {
     q: "Why are explainer videos and strong branding important in healthcare?",
@@ -33,11 +33,11 @@ export const PRICING_FAQS = [
   },
   {
     q: "Why choose a healthcare-focused marketing and technology partner?",
-    a: "Healthcare decisions are high-stakes. Patients and buyers need trust, clarity, and accurate information — not generic retail marketing. We understand how care businesses are chosen, evaluated, and remembered.",
+    a: "Healthcare decisions are high-stakes. Patients and buyers need trust, clarity, and accurate information - not generic retail marketing. We understand how care businesses are chosen, evaluated, and remembered.",
   },
   {
     q: "Can you help launch a new clinic or build a custom solution?",
-    a: "Yes. We support new clinics and growing organizations with branding, websites, launch campaigns, content, video, marketing, automation, and growth strategy — and we can tailor a custom mix of services when your needs go beyond a single offering.",
+    a: "Yes. We support new clinics and growing organizations with branding, websites, launch campaigns, content, video, marketing, automation, and growth strategy - and we can tailor a custom mix of services when your needs go beyond a single offering.",
   },
   {
     q: "How do we get started?",
